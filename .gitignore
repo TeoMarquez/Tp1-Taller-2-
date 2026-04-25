@@ -1,3 +1,9 @@
+# Folders created by the program
+reports/
+
+# Virtual environment shortcuts
+iniciar_venv.bat 
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[codz]
