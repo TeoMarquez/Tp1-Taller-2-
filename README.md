@@ -96,11 +96,6 @@ python scriptExploratorio.py
 >Opciones disponibles:
 > - `--overwrite` → sobreescribir el reporte anterior
 > - `--timestamp` → generar un reporte con timestamp
-```
-python scriptExploratorio.py --overwrite
-
-python scriptExploratorio.py --timestamp
-```
 
 Salida:
 
