@@ -8,7 +8,17 @@ DEFAULT_REPORT_PATH = Path("reports/exploration_report.md")
 
 
 def load_data(path: Path) -> pd.DataFrame:
-    return pd.read_csv(path)
+    try:
+        return pd.read_csv(path)
+    except FileNotFoundError:
+        print(f"[ERROR] No se encontró el archivo: {path}")
+        raise SystemExit(1)
+    except pd.errors.EmptyDataError:
+        print(f"[ERROR] El archivo está vacío: {path}")
+        raise SystemExit(1)
+    except Exception as e:
+        print(f"[ERROR] No se pudo leer el CSV: {e}")
+        raise SystemExit(1)
 
 
 def generate_markdown_report(df: pd.DataFrame) -> str:

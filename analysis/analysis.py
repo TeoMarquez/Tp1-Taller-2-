@@ -9,10 +9,18 @@ from modules.visualization import extra_visualization
 DATA_PATH = Path("../data/dataset.csv")
 REPORT_PATH = Path("../reports/report.md")
 
-
-def load_data():
-    return pd.read_csv(DATA_PATH)
-
+def load_data(path: Path) -> pd.DataFrame:
+    try:
+        return pd.read_csv(path)
+    except FileNotFoundError:
+        print(f"[ERROR] No se encontró el archivo: {path}")
+        raise SystemExit(1)
+    except pd.errors.EmptyDataError:
+        print(f"[ERROR] El archivo está vacío: {path}")
+        raise SystemExit(1)
+    except Exception as e:
+        print(f"[ERROR] No se pudo leer el CSV: {e}")
+        raise SystemExit(1)
 
 def save_report(content: str):
     REPORT_PATH.parent.mkdir(parents=True, exist_ok=True)
@@ -22,7 +30,7 @@ def save_report(content: str):
 
 def main():
     print("Cargando datos...")
-    df = load_data()
+    df = load_data(DATA_PATH)
 
     report = []
     report.append("# Reporte del análisis del dataset\n")
